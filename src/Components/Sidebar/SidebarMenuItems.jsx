@@ -4,7 +4,7 @@ function SidebarMenuItems({ Icon, itemName }) {
     return (
         <div className="sidebar__menu-item">
             <Icon className="sidebar__menu-item__icon" />
-            {itemName}
+            <span className="sidebar__menu-item_title">{itemName}</span>
         </div>
     )
 }
