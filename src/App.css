@@ -12,7 +12,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 20px;
+  padding: 15px;
 }
 
 .header .header__logo {
@@ -42,5 +42,17 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.app__viewer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.app__viewer .sidebar {
+  -webkit-box-flex: 0.17;
+      -ms-flex: 0.17;
+          flex: 0.17;
 }
 /*# sourceMappingURL=App.css.map */
