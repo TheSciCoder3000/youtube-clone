@@ -79,12 +79,12 @@ body {
     .sidebar {
         flex: 0.17;
         height: calc(100vh - 60px);
-        scrollbar-width: none;
+        scrollbar-width: thin;
         overflow-y: auto;
-        scrollbar-color: #b5b5b5 #ffffff;
-
+        scrollbar-color: #ffffff #ffffff;
+        
         &:hover {
-            scrollbar-width: thin;
+            scrollbar-color: #b5b5b5 #ffffff;
         }
 
         .sidebar__more__section-header {

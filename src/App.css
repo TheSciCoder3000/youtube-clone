@@ -120,13 +120,13 @@ body {
       -ms-flex: 0.17;
           flex: 0.17;
   height: calc(100vh - 60px);
-  scrollbar-width: none;
+  scrollbar-width: thin;
   overflow-y: auto;
-  scrollbar-color: #b5b5b5 #ffffff;
+  scrollbar-color: #ffffff #ffffff;
 }
 
 .app__viewer .sidebar:hover {
-  scrollbar-width: thin;
+  scrollbar-color: #b5b5b5 #ffffff;
 }
 
 .app__viewer .sidebar .sidebar__more__section-header {
