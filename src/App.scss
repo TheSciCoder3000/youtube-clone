@@ -70,6 +70,10 @@ body {
         .header__right__icon {
             margin-left: 25px;
         }
+        .header__right__avatar {
+            height: 32px;
+            width: 32px;
+        }
     }
 }
 
@@ -126,6 +130,41 @@ body {
     .recommended {
         flex: 0.83;
         background-color: #f9f9f9;
+        height: calc(100vh - 60px);
+        overflow-y: auto;
+        scrollbar-color: #b5b5b5 #ffffff;
+        scrollbar-width: thin;
+        padding: 18px 25px;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+
+        .recommended__videoItem {
+            width: 270px;
+            padding: 0 8px 10px 8px;
+
+            .videoItem__thumbnail {
+                width: 100%;
+            }
+            .videoItem__details {
+                display: flex;
+
+                .videoItem__details__thumbnail {
+                    margin-right: 10px;
+                    width: 36px;
+                    height: 36px;
+                }
+
+                .info__title {
+                    font-weight: 600;
+                    font-size: 18px;
+                }
+                .info__channel,
+                .info__video-data {
+                    font-size: 14px;
+                }
+            }
+        }
     }
 
     .some-content {
