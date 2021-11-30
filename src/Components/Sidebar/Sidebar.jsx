@@ -1,5 +1,6 @@
 import React from 'react'
 import SidebarMenuItems from './SidebarMenuItems'
+import { NavLink } from 'react-router-dom'
 
 import HomeIcon from '@mui/icons-material/Home';
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
@@ -20,9 +21,9 @@ function Sidebar() {
     return (
         <div className="sidebar">
             <div className="sidebar__inital-menus">
-                <SidebarMenuItems Icon={HomeIcon} itemName="Home" />
-                <SidebarMenuItems Icon={ExploreOutlinedIcon} itemName="Explore" />
-                <SidebarMenuItems Icon={SubscriptionsOutlined} itemName="Subscriptions" />
+                <NavLink className="sidebar__navlinks" exact to="/" activeClassName="sidebar-navlink-selected"><SidebarMenuItems Icon={HomeIcon} itemName="Home" /></NavLink>
+                <NavLink className="sidebar__navlinks" to="/explore" activeClassName="sidebar-navlink-selected"><SidebarMenuItems Icon={ExploreOutlinedIcon} itemName="Explore" /></NavLink>
+                <NavLink className="sidebar__navlinks" to="/subscription" activeClassName="sidebar-navlink-selected"><SidebarMenuItems Icon={SubscriptionsOutlined} itemName="Subscriptions" /></NavLink>
             </div>
             <hr className="sidebar__hr" />
             <div className="sidebar__secondary-menus">
