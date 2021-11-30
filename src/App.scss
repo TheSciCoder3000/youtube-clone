@@ -24,21 +24,25 @@ body {
         border: 1px solid #c9c9c9;
         flex: 0.60;
         height: 38px;
-
-        input {
+        user-select: none;
+        
+        form {
             flex: 1;
-            height: 90%;
-            border: none;
-            margin-left: 20px;
-            font-size: 17px;
 
-            &:focus {
-                outline: none;
+            input {
+                height: 90%;
                 border: none;
-                outline-width: 0;
-                
-                &::placeholder {
-                    color: transparent;
+                margin-left: 20px;
+                font-size: 17px;
+    
+                &:focus {
+                    outline: none;
+                    border: none;
+                    outline-width: 0;
+                    
+                    &::placeholder {
+                        color: transparent;
+                    }
                 }
             }
         }
@@ -81,11 +85,12 @@ body {
     display: flex;
 
     .sidebar {
-        flex: 0.17;
+        flex: 0.18;
         height: calc(100vh - 60px);
         scrollbar-width: thin;
         overflow-y: auto;
         scrollbar-color: #ffffff #ffffff;
+        padding-top: 10px;
         
         &:hover {
             scrollbar-color: #b5b5b5 #ffffff;
@@ -97,6 +102,16 @@ body {
             font-size: 15px;
             font-weight: 600;
             color: #656565;
+        }
+
+        .sidebar__navlinks {
+            color: black;
+            text-decoration: none;
+        }
+
+        .sidebar-navlink-selected > .sidebar__menu-item {
+            background-color: #c5c5c569;
+            font-weight: 600;
         }
 
         .sidebar__menu-item {
@@ -127,41 +142,44 @@ body {
         }
     }
 
-    .recommended {
-        flex: 0.83;
+    .app__viewer__main {
+        flex: 0.82;
         background-color: #f9f9f9;
         height: calc(100vh - 60px);
         overflow-y: auto;
         scrollbar-color: #b5b5b5 #ffffff;
         scrollbar-width: thin;
-        padding: 18px 25px;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: flex-start;
 
-        .recommended__videoItem {
-            width: 270px;
-            padding: 0 8px 10px 8px;
+        &.recommended {
+            padding: 18px 25px;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+    
+            .recommended__videoItem {
+                width: 270px;
+                padding: 0 8px 10px 8px;
 
-            .videoItem__thumbnail {
-                width: 100%;
-            }
-            .videoItem__details {
-                display: flex;
-
-                .videoItem__details__thumbnail {
-                    margin-right: 10px;
-                    width: 36px;
-                    height: 36px;
+                .videoItem__thumbnail {
+                    width: 100%;
                 }
+                .videoItem__details {
+                    display: flex;
 
-                .info__title {
-                    font-weight: 600;
-                    font-size: 18px;
-                }
-                .info__channel,
-                .info__video-data {
-                    font-size: 14px;
+                    .videoItem__details__thumbnail {
+                        margin-right: 10px;
+                        width: 36px;
+                        height: 36px;
+                    }
+
+                    .info__title {
+                        font-weight: 600;
+                        font-size: 18px;
+                    }
+                    .info__channel,
+                    .info__video-data {
+                        font-size: 14px;
+                    }
                 }
             }
         }
