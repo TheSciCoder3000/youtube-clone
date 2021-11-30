@@ -142,7 +142,7 @@ const youtubeVids = [
 
 function Recommended() {
     return (
-        <div className="recommended">
+        <div className="app__viewer__main recommended">
             {youtubeVids.map((vid, indx) => (
                 <VideoItems key={indx} 
                             title={vid.title}
