@@ -121,6 +121,31 @@ body {
   width: 32px;
 }
 
+.header .header__right .header__right__sign-in {
+  margin-left: 20px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: transparent;
+  color: #696969;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 2px 17px;
+}
+
+.header .header__right .header__right__sign-in:hover {
+  cursor: pointer;
+  background-color: #fafafa;
+}
+
+.header .header__right .header__right__sign-in .sign-in__user-icon {
+  margin-right: 10px;
+}
+
 .app__viewer {
   display: -webkit-box;
   display: -ms-flexbox;

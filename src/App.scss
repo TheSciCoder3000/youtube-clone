@@ -78,6 +78,26 @@ body {
             height: 32px;
             width: 32px;
         }
+        .header__right__sign-in {
+            margin-left: 20px;
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            background-color: transparent;
+            color: #696969;
+            display: flex;
+            align-items: center;
+            padding: 2px 17px;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #fafafa;
+            }
+
+            .sign-in__user-icon {
+                margin-right: 10px;
+            }
+        }
     }
 }
 
