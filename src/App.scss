@@ -34,6 +34,7 @@ body {
                 border: none;
                 margin-left: 20px;
                 font-size: 17px;
+                width: 100%;
     
                 &:focus {
                     outline: none;
@@ -199,6 +200,93 @@ body {
                     .info__channel,
                     .info__video-data {
                         font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        &.search {
+            padding: 20px 35px;
+
+            .search__filter {
+                display: flex;
+                align-items: center;
+                padding-bottom: 7px;
+
+                .search__filter__icon {
+                    margin-right: 5px;
+                }
+                .search__filter__title {
+                    font-size: 18px;
+                    display: flex;
+                    align-items: center;
+                }
+            }
+
+            .search__vidList__channel-item {
+                display: flex;
+                align-items: center;
+                margin-top: 16px;
+                padding-right: 50px;
+
+                .channel-item__channel-img {
+                    margin: 0 120px;
+                    height: 136px;
+                    width: 136px;
+                }
+                .channel-item__channel-info {
+                    display: flex;
+                    flex-direction: column;
+                    align-content: center;
+                    flex: 1;
+                    min-width: 0;
+
+                    .channel-info__channel-name {
+                        font-weight: 600;
+                    }
+                    .channel-info__channel-stats {
+                        font-size: 12px;
+                    }
+                    .channel-info__channel-desc {
+                        height: 24px;
+                        font-size: 12px;
+                        line-height: 24px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
+            }
+
+            .search__vidList__video-item {
+                display: flex;
+                align-items: flex-start;
+                padding-right: 50px;
+                margin-top: 16px;
+
+                .video-item__video-thumbnail {
+                    width: 360px;
+                    object-fit: cover;
+                    margin-right: 20px;
+                }
+                .video-item__video-info {
+                    display: flex;
+                    flex-direction: column;
+                    min-width: 0;
+
+                    .video-info__title {
+                        font-weight: 600;
+                    }
+                    .video-info__video-stats {
+                        font-size: 12px;
+                    }
+                    .video-info__desc {
+                        height: 24px;
+                        font-size: 12px;
+                        line-height: 24px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
                     }
                 }
             }

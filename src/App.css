@@ -54,6 +54,7 @@ body {
   border: none;
   margin-left: 20px;
   font-size: 17px;
+  width: 100%;
 }
 
 .header .header__center form input:focus {
@@ -267,6 +268,130 @@ body {
 .app__viewer .app__viewer__main.recommended .recommended__videoItem .videoItem__details .info__channel,
 .app__viewer .app__viewer__main.recommended .recommended__videoItem .videoItem__details .info__video-data {
   font-size: 14px;
+}
+
+.app__viewer .app__viewer__main.search {
+  padding: 20px 35px;
+}
+
+.app__viewer .app__viewer__main.search .search__filter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-bottom: 7px;
+}
+
+.app__viewer .app__viewer__main.search .search__filter .search__filter__icon {
+  margin-right: 5px;
+}
+
+.app__viewer .app__viewer__main.search .search__filter .search__filter__title {
+  font-size: 18px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.app__viewer .app__viewer__main.search .search__vidList__channel-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 16px;
+  padding-right: 50px;
+}
+
+.app__viewer .app__viewer__main.search .search__vidList__channel-item .channel-item__channel-img {
+  margin: 0 120px;
+  height: 136px;
+  width: 136px;
+}
+
+.app__viewer .app__viewer__main.search .search__vidList__channel-item .channel-item__channel-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  min-width: 0;
+}
+
+.app__viewer .app__viewer__main.search .search__vidList__channel-item .channel-item__channel-info .channel-info__channel-name {
+  font-weight: 600;
+}
+
+.app__viewer .app__viewer__main.search .search__vidList__channel-item .channel-item__channel-info .channel-info__channel-stats {
+  font-size: 12px;
+}
+
+.app__viewer .app__viewer__main.search .search__vidList__channel-item .channel-item__channel-info .channel-info__channel-desc {
+  height: 24px;
+  font-size: 12px;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app__viewer .app__viewer__main.search .search__vidList__video-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding-right: 50px;
+  margin-top: 16px;
+}
+
+.app__viewer .app__viewer__main.search .search__vidList__video-item .video-item__video-thumbnail {
+  width: 360px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-right: 20px;
+}
+
+.app__viewer .app__viewer__main.search .search__vidList__video-item .video-item__video-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-width: 0;
+}
+
+.app__viewer .app__viewer__main.search .search__vidList__video-item .video-item__video-info .video-info__title {
+  font-weight: 600;
+}
+
+.app__viewer .app__viewer__main.search .search__vidList__video-item .video-item__video-info .video-info__video-stats {
+  font-size: 12px;
+}
+
+.app__viewer .app__viewer__main.search .search__vidList__video-item .video-item__video-info .video-info__desc {
+  height: 24px;
+  font-size: 12px;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .app__viewer .some-content {
