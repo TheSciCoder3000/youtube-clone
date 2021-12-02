@@ -9,7 +9,8 @@ import { initAuth } from './OAuth2.0';
 
 function App() {
   const [IsSignedIn, setIsSignedIn] = useState(false)
-  const { handleClientLoad, handleAuthClick, handleSignOutClick } = initAuth(setIsSignedIn)
+  const [UserProfile, setUserProfile] = useState({})
+  const { handleClientLoad, handleAuthClick, handleSignOutClick } = initAuth(setIsSignedIn, setUserProfile)
 
   useEffect(() => {
     console.log('Loading...')
@@ -35,7 +36,10 @@ function App() {
   return (
     <div className="app">
       <Router>
-        <Header IsSignedIn={IsSignedIn} onSignIn={handleAuthClick} onSignOut={handleSignOutClick} />
+        <Header IsSignedIn={IsSignedIn} 
+                onSignIn={handleAuthClick} 
+                onSignOut={handleSignOutClick}
+                UserProfile={UserProfile} />
         <div className="app__viewer">
           <Sidebar />
 
@@ -47,7 +51,7 @@ function App() {
               </div>
             </Route>
             <Route path={`/search/:searchData`}>
-              <Search />
+              <Search IsSignedIn={IsSignedIn} />
             </Route>
             <Route exact path="/">
               <Recommended />

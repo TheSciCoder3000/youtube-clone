@@ -5,7 +5,7 @@ const SCOPES = 'https://www.googleapis.com/auth/youtube.readonly'
 const gapi = window.gapi
 var GoogleAuth
 
-export function initAuth(setIsSignedIn) {
+export function initAuth(setIsSignedIn, setUserProfile) {
     const authorizeButton = document.getElementById('sign-in-btn')
     const signOutButton = document.getElementById('sign-out-btn')
 
@@ -22,10 +22,7 @@ export function initAuth(setIsSignedIn) {
             GoogleAuth = gapi.auth2.getAuthInstance()
             GoogleAuth.isSignedIn.listen(updateSignInStatus)
 
-            if (GoogleAuth.isSignedIn.get()) {
-                setIsSignedIn(true)
-                console.log('user is already signed in')
-            }
+            updateSignInStatus(GoogleAuth.isSignedIn.get())
         })
     }
 
@@ -33,6 +30,7 @@ export function initAuth(setIsSignedIn) {
         setIsSignedIn(isSignedIn)
         if (isSignedIn) {
             console.log('user is signed in')
+            getUserProfile()
         } else {
             console.log('user is signed out')
         }
@@ -46,5 +44,71 @@ export function initAuth(setIsSignedIn) {
         gapi.auth2.getAuthInstance().signOut()
     }
 
+    function getUserProfile() {
+        console.log('retrieving user profile')
+        setUserProfile(GoogleAuth.currentUser.get().getBasicProfile())
+    }
+
     return { handleClientLoad, handleAuthClick, handleSignOutClick }
+}
+
+export async function searchByKeyword(keyword, setSearchData) {
+    console.log('searching...')
+    gapi.client.youtube.search.list({
+        "part": [
+          "id,snippet"
+        ],
+        "maxResults": 20,
+        "q": keyword
+    }).then(function(response) {
+        // Handle the results here (response.result has the parsed body).
+        console.log("Response", response.result);
+        let vidIds = response.result.items.map(item => {
+            if (item.id.kind == 'youtube#video') return item.id.videoId
+        })
+        let PromiseVidList = videosByVidId(vidIds)
+        let PromiseChannelList = channelById(response.result.items.map(item => {
+            if (item.id.kind == "youtube#channel") return item.id.channelId
+        }))
+
+        Promise.all([PromiseVidList, PromiseChannelList]).then(function ([VidList, ChannelList]) {
+            console.log('async vid list', VidList)
+            console.log('async channel list', ChannelList.items)
+    
+            setSearchData({
+                items: [
+                    ...(ChannelList.items ? ChannelList.items : []),
+                    ...VidList.items
+                ]
+            })
+        })
+    })
+}
+
+async function videosByVidId(vidIdList) {
+    console.log('searching vids')
+    return gapi.client.youtube.videos.list({
+        "part": [
+          "snippet, statistics"
+        ],
+        "id": vidIdList,
+        "maxResults": 20
+      }).then(function(response) {
+          console.log('vid data response', response.result)
+          return response.result
+      })
+}
+
+async function channelById(channelIdList) {
+    console.log('searching for channel data')
+    return gapi.client.youtube.channels.list({
+        "part": [
+          "id,statistics,snippet"
+        ],
+        "id": channelIdList,
+        "maxResults": 20
+      }).then(function(response) {
+          console.log('channel data response ', response.result)
+          return response.result
+      })
 }
