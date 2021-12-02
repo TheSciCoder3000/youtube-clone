@@ -8,7 +8,7 @@ import Avatar from '@material-ui/core/Avatar'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { Link, useHistory } from 'react-router-dom'
 
-function Header({ IsSignedIn, onSignIn, onSignOut }) {
+function Header({ IsSignedIn, onSignIn, onSignOut, UserProfile }) {
     const [searchData, setSearchData] = useState('')
     const history = useHistory()
 
@@ -54,7 +54,7 @@ function Header({ IsSignedIn, onSignIn, onSignOut }) {
                         <Avatar
                             className="header__right__icon header__right__avatar"
                             alt="avatar"
-                            src="https://scontent.fmnl3-2.fna.fbcdn.net/v/t1.6435-9/135637488_1891484974340668_3102476322743592132_n.jpg?_nc_cat=1&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeFcXF_8NLCRIWV6NGaMyCq6RvVGE0iDeTtG9UYTSIN5O3MXBD5ofV7IDVW2gMLuxu2aaxWYYTPuHrPM1sBxv9_l&_nc_ohc=TW-aggDO3IwAX_cgZ8t&_nc_ht=scontent.fmnl3-2.fna&oh=9d47197237aad9b74d8b97972b844729&oe=61C5507E"
+                            src={UserProfile.RM}
                         />
                         <button id="sing-out-btn" onClick={onSignOut} className="header__right__sign-in">SIGN OUT</button>
                     </>
