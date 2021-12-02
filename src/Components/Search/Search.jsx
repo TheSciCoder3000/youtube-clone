@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
 import { useParams, Route } from 'react-router-dom'
 import { searchByKeyword } from '../../OAuth2.0'
 import ChannelItem from './ChannelItem'
@@ -20,23 +21,32 @@ function Search({ IsSignedIn }) {
             if (item.kind == "youtube#channel") {
                 let channelData = item.snippet
                 return <ChannelItem key={item.id}
-                                    channelName={channelData.channelTitle}
+                                    channelName={channelData.title}
                                     channelImg={channelData.thumbnails.high.url}
                                     vids={item.statistics.videoCount}
+                                    subs={item.statistics.subscriberCount}
                                     desc={channelData.description} />
             } else {
                 return <VideoItem key={item.id}
                                   title={item.snippet.title}
-                                  thumbnail={item.snippet.thumbnails.default.url}
+                                  thumbnail={
+                                    item.snippet.thumbnails.maxres ? item.snippet.thumbnails.maxres.url
+                                    : item.snippet.thumbnails.high ? item.snippet.thumbnails.high.url 
+                                    : item.snippet.thumbnails.standard.url
+                                  }
                                   desc={item.snippet.description}
+                                  timestamp={item.snippet.publishedAt}
                                   views={item.statistics.viewCount} />
             }
         })
     }
 
     return (
-        <div className="app__viewer__main">
-            <div className="search__filter">filter</div>
+        <div className="app__viewer__main search">
+            <div className="search__filter">
+                <TuneOutlinedIcon className="search__filter__icon" />
+                <span className="search__filter__title">FILTERS</span>
+            </div>
             <hr className="search__hr" />
             <div className="search__vidList">
                 {/* you searched for {searchKeyword} */}
