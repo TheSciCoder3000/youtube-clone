@@ -18,6 +18,15 @@ body {
         margin-right: 20px;
     }
 
+    .header__left {
+        white-space: nowrap;
+        .search-back-icon {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
     .header__center {
         display: flex;
         align-items: center;
@@ -72,6 +81,16 @@ body {
         display: flex;
         align-items: center;
 
+        .search-icon-container {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 50px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
         .header__right__icon {
             margin-left: 25px;
         }
@@ -106,7 +125,7 @@ body {
     display: flex;
 
     .sidebar {
-        flex: 0.18;
+        width: 240px;
         height: calc(100vh - 60px);
         scrollbar-width: thin;
         overflow-y: auto;
@@ -162,9 +181,29 @@ body {
             background-color: #e1e1e1;
         }
     }
+    .sidebar-sml {
+        width: 72px;
+
+        .sidebar__navlinks {
+            text-decoration: none;
+            color: black;
+
+            .sidebar__menu-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-size: 10px;
+                padding: 16px 0;
+
+                .sidebar__menu-item__icon {
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
 
     .app__viewer__main {
-        flex: 0.82;
+        flex: 1;
         background-color: #f9f9f9;
         height: calc(100vh - 60px);
         overflow-y: auto;
@@ -300,4 +339,3 @@ body {
         scroll-margin: 20px;
     }
 }
-
