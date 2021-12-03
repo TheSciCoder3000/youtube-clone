@@ -59,4 +59,15 @@ function Sidebar() {
     )
 }
 
+export function SidebarSmall() {
+    return (
+        <div className="sidebar-sml">
+            <NavLink className="sidebar__navlinks" exact to="/" activeClassName="sidebar-navlink-selected"><SidebarMenuItems Icon={HomeIcon} itemName="Home" /></NavLink>
+            <NavLink className="sidebar__navlinks" to="/explore" activeClassName="sidebar-navlink-selected"><SidebarMenuItems Icon={ExploreOutlinedIcon} itemName="Explore" /></NavLink>
+            <NavLink className="sidebar__navlinks" to="/subscription" activeClassName="sidebar-navlink-selected"><SidebarMenuItems Icon={SubscriptionsOutlined} itemName="Subscriptions" /></NavLink>
+            <NavLink className="sidebar__navlinks" to="/library" activeClassName="sidebar-navlink-selected" ><SidebarMenuItems Icon={VideoLibraryOutlined} itemName="Libary" /></NavLink>
+        </div>
+    )
+}
+
 export default Sidebar

@@ -1,16 +1,18 @@
 import './App.css';
 import Header from './Header'
-import Sidebar from './Components/Sidebar/Sidebar'
+import Sidebar, { SidebarSmall } from './Components/Sidebar/Sidebar'
 import Recommended from './Components/Recommended/Recommended'
 import Search from './Components/Search/Search'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import { initAuth } from './OAuth2.0';
+import { useWindowSize } from './utils';
 
 function App() {
   const [IsSignedIn, setIsSignedIn] = useState(false)
   const [UserProfile, setUserProfile] = useState({})
   const { handleClientLoad, handleAuthClick, handleSignOutClick } = initAuth(setIsSignedIn, setUserProfile)
+  const [screenWidth, screenHeight] = useWindowSize()
 
   useEffect(() => {
     console.log('Loading...')
@@ -39,9 +41,14 @@ function App() {
         <Header IsSignedIn={IsSignedIn} 
                 onSignIn={handleAuthClick} 
                 onSignOut={handleSignOutClick}
-                UserProfile={UserProfile} />
+                UserProfile={UserProfile}
+                screenWidth={screenWidth} />
         <div className="app__viewer">
-          <Sidebar />
+          {
+            screenWidth >= 1313 ? <Sidebar />
+            : screenWidth >= 792 ? <SidebarSmall />
+            : <></>
+          }
 
           <Switch>
             <Route exact path="/search">
