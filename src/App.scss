@@ -12,6 +12,10 @@ body {
     justify-content: space-between;
     padding: 10px 25px;
 
+    .hamburger-icon:hover {
+        cursor: pointer;
+    }
+
     .header__logo {
         height: 25px;
         margin-left: 20px;
@@ -201,6 +205,41 @@ body {
             }
         }
     }
+    .sidebar-overlay {
+        background-color: white;
+        width: 240px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 100;
+
+        .sidebar-header {
+            padding: 10px 25px;
+            display: flex;
+            align-items: center;
+            height: 40px;
+        }
+
+        .hamburger-icon:hover {
+            cursor: pointer;
+        }
+    
+        .header__logo {
+            height: 25px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+    }
+    .dark-overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background-color: #5757575d;
+        z-index: 90;
+    }
 
     .app__viewer__main {
         flex: 1;
@@ -212,12 +251,12 @@ body {
 
         &.recommended {
             padding: 18px 25px;
-            display: flex;
-            flex-wrap: wrap;
-            align-content: flex-start;
+            display: grid;
+            // flex-wrap: wrap;
+            // align-content: flex-start;
     
             .recommended__videoItem {
-                width: 270px;
+                max-width: 370px;
                 padding: 0 8px 10px 8px;
 
                 .videoItem__thumbnail {
@@ -337,5 +376,40 @@ body {
         margin: 28.1px;
         font-size: 12px;
         scroll-margin: 20px;
+    }
+}
+
+@media screen and (min-width: 0px) {
+    .app__viewer__main {
+        &.recommended {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+}
+
+@media screen and (min-width: 495px) {
+    .app__viewer__main {
+        &.recommended {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+
+@media screen and (min-width: 872px) {
+    .app__viewer__main {
+        &.recommended {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+
+@media screen and (min-width: 1128px) {
+    .app__viewer__main {
+        &.recommended {
+            grid-template-columns: repeat(4, 1fr);
+        }
     }
 }

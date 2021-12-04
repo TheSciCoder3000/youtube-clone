@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { Link, useHistory } from 'react-router-dom'
 
-function Header({ IsSignedIn, onSignIn, onSignOut, UserProfile, screenWidth }) {
+function Header({ IsSignedIn, onSignIn, onSignOut, UserProfile, screenWidth, setToggleSidebar, setToggleMidSidebar }) {
     const [searchData, setSearchData] = useState('')
     const [ShowSearch, setShowSearch] = useState(false)
     const history = useHistory()
@@ -18,6 +18,11 @@ function Header({ IsSignedIn, onSignIn, onSignOut, UserProfile, screenWidth }) {
         e.preventDefault()
         setShowSearch(false)
         history.push(`/search/${searchData}`)
+    }
+
+    const onMenuClick = () => {
+        if (screenWidth >= 1313) setToggleSidebar(sidebarState => !sidebarState)
+        else setToggleMidSidebar(state => !state)
     }
 
     const onSearchBtnClick = () => setShowSearch(true)
@@ -29,7 +34,7 @@ function Header({ IsSignedIn, onSignIn, onSignOut, UserProfile, screenWidth }) {
                     <ArrowBackOutlinedIcon onClick={() => setShowSearch(false)} className="search-back-icon" />
                     :
                     <>
-                        <Menu />
+                        <Menu className="hamburger-icon" onClick={onMenuClick} />
                         <Link to="/">
                             <img 
                                 className="header__logo" 
