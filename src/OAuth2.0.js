@@ -44,9 +44,20 @@ export function initAuth(setIsSignedIn, setUserProfile) {
         gapi.auth2.getAuthInstance().signOut()
     }
 
-    function getUserProfile() {
-        console.log('retrieving user profile')
-        setUserProfile(GoogleAuth.currentUser.get().getBasicProfile())
+    async function getUserProfile() {
+        console.log('retrieving user profile', GoogleAuth.currentUser.get())
+        let channelName = await gapi.client.youtube.channels.list({
+            "part": [
+                "id,snippet"
+            ],
+            "mine": true
+        }).then(response => {
+            return response.result.items[0].snippet.title
+        })
+        setUserProfile({
+            channelName,
+            ...GoogleAuth.currentUser.get().getBasicProfile()
+        })
     }
 
     return { handleClientLoad, handleAuthClick, handleSignOutClick }
