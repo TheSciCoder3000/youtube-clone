@@ -4,10 +4,11 @@ import Sidebar, { SidebarSmall } from './Components/Sidebar/Sidebar'
 import SidebarOverlay from './Components/Sidebar/SidebarOverlay';
 import Recommended from './Components/Recommended/Recommended'
 import Search from './Components/Search/Search'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import { initAuth } from './OAuth2.0';
 import { useWindowSize } from './utils';
+import Hidden from './Components/Hidden/Hidden'
 
 function App() {
   const [IsSignedIn, setIsSignedIn] = useState(false)
@@ -59,6 +60,9 @@ function App() {
             </Route>
             <Route exact path="/">
               <Recommended />
+            </Route>
+            <Route exact path="/xxHiddenxx">
+              <Hidden />
             </Route>
           </Switch>
         </div>

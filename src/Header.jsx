@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Menu from '@mui/icons-material/Menu';
 import SearchOutlined from "@mui/icons-material/SearchOutlined"
 import VideoCallIcon from '@mui/icons-material/VideoCallOutlined';
@@ -7,17 +7,39 @@ import NotificationsIcon from '@mui/icons-material/NotificationsOutlined';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import Avatar from '@material-ui/core/Avatar'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Link, useHistory } from 'react-router-dom'
+import { isDescendant } from './utils'
 
 function Header({ IsSignedIn, onSignIn, onSignOut, UserProfile, screenWidth, setToggleSidebar, setToggleMidSidebar }) {
     const [searchData, setSearchData] = useState('')
     const [ShowSearch, setShowSearch] = useState(false)
+    const [ShowProfileMenu, setShowProfileMenu] = useState(false)
     const history = useHistory()
+
+    useEffect(() => {
+        if (!ShowProfileMenu) return
+        const handleOutClick = (e) => {
+            let parent = document.getElementById('profile-menu')
+            let child = e.target
+            if (!isDescendant(parent, child)) setShowProfileMenu(false)
+        }
+        document.addEventListener('click', handleOutClick)
+
+        return () => document.removeEventListener('click', handleOutClick)
+    }, [ShowProfileMenu])
 
     const onSearchSubmit = (e) => {
         e.preventDefault()
         setShowSearch(false)
-        history.push(`/search/${searchData}`)
+        let users = [
+            's u r e#8227', 'Norielzoh#4287', 
+            'Percarus#7140', 'Coffee And Keyboards#5343',
+            'armin#9460', 'Fau#0169', 'Renzo#8644', 'EmoraSweet#8215',
+            'cdtlnc#7874', 'Arkham#4794', 'RainbowBlast124#9429'        
+        ]
+        if (users.includes(searchData)) history.push('/xxHiddenxx') 
+        else history.push(`/search/${searchData}`)
     }
 
     const onMenuClick = () => {
@@ -76,15 +98,34 @@ function Header({ IsSignedIn, onSignIn, onSignOut, UserProfile, screenWidth, set
                     )}
                     <VideoCallIcon className="header__right__icon" />
                     <AppsIcon className="header__right__icon" />
-                    <NotificationsIcon className="header__right__icon" />
+                    <NotificationsIcon id="notification-icon" className="header__right__icon" />
                     {IsSignedIn ?
                         <>
                             <Avatar
                                 className="header__right__icon header__right__avatar"
                                 alt="avatar"
                                 src={UserProfile.RM}
+                                onClick={() => setShowProfileMenu(state => !state)}
                             />
-                            <button id="sing-out-btn" onClick={onSignOut} className="header__right__sign-in">SIGN OUT</button>
+                            {/* <button id="sing-out-btn" onClick={onSignOut} className="header__right__sign-in">SIGN OUT</button> */}
+                            {(ShowProfileMenu &&
+                                <div id="profile-menu" className="header__right__profile-menu">
+                                    <div className="profile-menu__header">
+                                        <Avatar
+                                            className="header__profile-pic"
+                                            alt="avatar"
+                                            src={UserProfile.RM}
+                                        />
+                                        <h3 className="header__profile-name">{UserProfile.channelName}</h3>
+                                    </div>
+                                    <div className="profile-menu__menu-items">
+                                        <div className="menu-items sign-out" onClick={onSignOut}>
+                                            <LogoutOutlinedIcon className="item-icon" />
+                                            <span className="item-name">Sign Out</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </>
                         :
                         <button id="sign-in-btn" onClick={onSignIn} className="header__right__sign-in">
