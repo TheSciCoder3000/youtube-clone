@@ -101,6 +101,10 @@ body {
         .header__right__avatar {
             height: 32px;
             width: 32px;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
         .header__right__sign-in {
             margin-left: 20px;
@@ -120,6 +124,50 @@ body {
 
             .sign-in__user-icon {
                 margin-right: 10px;
+            }
+        }
+
+        .header__right__profile-menu {
+            background-color: white;
+            position: absolute;
+            top: 0;
+            right:  70px;
+            width: 300px;
+            border: 1px solid #0000001a;
+
+            .profile-menu__header {
+                padding: 16px;
+                display: flex;
+                border-bottom: 1px solid #0000001a;
+
+                .header__profile-pic {
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 16px;
+                }
+            }
+            .profile-menu__menu-items {
+                padding: 8px 0;
+
+                .menu-items {
+                    padding-left: 16px;
+                    padding-right: 32px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+    
+                    &:hover {
+                        cursor: pointer;
+                        background-color: #90909020;
+                    }
+    
+                    .item-icon {
+                        margin-right: 16px;
+                    }
+                    .item-name {
+                        font-size: 15px;
+                    }
+                }
             }
         }
     }
@@ -377,6 +425,35 @@ body {
         font-size: 12px;
         scroll-margin: 20px;
     }
+
+    .rick-rolled-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f9f9f9;
+        padding-bottom: 50px;
+
+        .permission {
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        .permission-btn {
+            padding: 15px 40px;
+            border: none;
+            background-color: #ff0e0e;
+            border-radius: 10px;
+            color: white;
+            font-weight: 900;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #ff3f3f;
+            }
+        }
+    }
 }
 
 @media screen and (min-width: 0px) {
@@ -387,6 +464,9 @@ body {
             justify-content: center;
         }
     }
+    #notification-icon {
+        display: none;
+    }
 }
 
 @media screen and (min-width: 495px) {
@@ -394,6 +474,9 @@ body {
         &.recommended {
             grid-template-columns: repeat(2, 1fr);
         }
+    }
+    #notification-icon {
+        display: block;
     }
 }
 
