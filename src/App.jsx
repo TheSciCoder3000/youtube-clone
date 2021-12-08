@@ -10,6 +10,27 @@ import { initAuth } from './OAuth2.0';
 import { useWindowSize } from './utils';
 import Hidden from './Components/Hidden/Hidden'
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics, logEvent } from "firebase/analytics";
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDxLkhjRizHMMeMiRc0DtJHZCbgd5uIaeo",
+  authDomain: "clone-497bf.firebaseapp.com",
+  projectId: "clone-497bf",
+  storageBucket: "clone-497bf.appspot.com",
+  messagingSenderId: "207158038962",
+  appId: "1:207158038962:web:b510884ea8512ee39894ab",
+  measurementId: "${config.measurementId}"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+logEvent(analytics, 'notification_received');
+
 function App() {
   const [IsSignedIn, setIsSignedIn] = useState(false)
   const [UserProfile, setUserProfile] = useState({})
