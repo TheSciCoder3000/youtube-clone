@@ -5,14 +5,15 @@ const SCOPES = 'https://www.googleapis.com/auth/youtube.readonly'
 const gapi = window.gapi
 var GoogleAuth
 
+// OAuth2.0 Initialization Function
 export function initAuth(setIsSignedIn, setUserProfile) {
-    const authorizeButton = document.getElementById('sign-in-btn')
-    const signOutButton = document.getElementById('sign-out-btn')
 
+    // Load Client Function
     function handleClientLoad() {
         gapi.load('client:auth2', initClient)
     }
 
+    // Client Initialization Function
     function initClient() {
         gapi.client.init({
             discoveryDocs: DISCOVERY_DOCS,
@@ -20,32 +21,37 @@ export function initAuth(setIsSignedIn, setUserProfile) {
             scope: SCOPES
         }).then(() => {
             GoogleAuth = gapi.auth2.getAuthInstance()
+
+            // Add Update Listenner
             GoogleAuth.isSignedIn.listen(updateSignInStatus)
 
+            // Update the UI
             updateSignInStatus(GoogleAuth.isSignedIn.get())
         })
     }
 
+    // Update Event Handler
     function updateSignInStatus(isSignedIn) {
+        // Update react component state
         setIsSignedIn(isSignedIn)
-        if (isSignedIn) {
-            console.log('user is signed in')
-            getUserProfile()
-        } else {
-            console.log('user is signed out')
-        }
+
+        // If user is signed in, retrieve User Profile Data
+        if (isSignedIn) getUserProfile()
     }
 
+    // Sign In Event Handler
     function handleAuthClick() {
         gapi.auth2.getAuthInstance().signIn()
     }
 
+    // Sign Out Event Handler
     function handleSignOutClick() {
         gapi.auth2.getAuthInstance().signOut()
     }
 
+    // Getting User Profile Data Function
     async function getUserProfile() {
-        console.log('retrieving user profile', GoogleAuth.currentUser.get())
+        // Get channel name
         let channelName = await gapi.client.youtube.channels.list({
             "part": [
                 "id,snippet"
@@ -54,6 +60,8 @@ export function initAuth(setIsSignedIn, setUserProfile) {
         }).then(response => {
             return response.result.items[0].snippet.title
         })
+
+        // Update User Profile State of component
         setUserProfile({
             channelName,
             ...GoogleAuth.currentUser.get().getBasicProfile()
@@ -63,8 +71,11 @@ export function initAuth(setIsSignedIn, setUserProfile) {
     return { handleClientLoad, handleAuthClick, handleSignOutClick }
 }
 
+
+// ============================== YouTube Query Functions ==============================
+
+// Query by keyword (Main Search Function)
 export async function searchByKeyword(keyword, setSearchData) {
-    console.log('searching...')
     gapi.client.youtube.search.list({
         "part": [
           "id,snippet"
@@ -72,20 +83,22 @@ export async function searchByKeyword(keyword, setSearchData) {
         "maxResults": 20,
         "q": keyword
     }).then(function(response) {
-        // Handle the results here (response.result has the parsed body).
-        console.log("Response", response.result);
+        // Map Video Ids
         let vidIds = response.result.items.map(item => {
             if (item.id.kind == 'youtube#video') return item.id.videoId
         })
+
+        // get video details of video Ids
         let PromiseVidList = videosByVidId(vidIds)
+
+        // Get the channel details
         let PromiseChannelList = channelById(response.result.items.map(item => {
             if (item.id.kind == "youtube#channel") return item.id.channelId
         }))
 
+        // Resolve all promises
         Promise.all([PromiseVidList, PromiseChannelList]).then(function ([VidList, ChannelList]) {
-            console.log('async vid list', VidList)
-            console.log('async channel list', ChannelList.items)
-    
+            // Update Component Search Data
             setSearchData({
                 items: [
                     ...(ChannelList.items ? ChannelList.items : []),

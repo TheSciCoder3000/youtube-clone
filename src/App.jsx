@@ -31,20 +31,23 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 logEvent(analytics, 'notification_received');
 
+// Main App Component
 function App() {
-  const [IsSignedIn, setIsSignedIn] = useState(false)
-  const [UserProfile, setUserProfile] = useState({})
+  // Initializing States
+  const [IsSignedIn, setIsSignedIn] = useState(false)                                 // User SignedIn Status
+  const [UserProfile, setUserProfile] = useState({})                                  // User Profile Data
 
-  const [ToggleSidebar, setToggleSidebar] = useState(true)
-  const [ToggleMidSidebar, setToggleMidSidebar] = useState(false)
+  const [ToggleSidebar, setToggleSidebar] = useState(true)                            // Sidebar State
+  const [ToggleMidSidebar, setToggleMidSidebar] = useState(false)                     // Sidebar State for Medium screens
 
+  // Google OAuth2.0 Initialization
   const { handleClientLoad, handleAuthClick, handleSignOutClick } = initAuth(setIsSignedIn, setUserProfile)
+
+  // Dynamically getting screen size
   const [screenWidth, _] = useWindowSize()
 
-  useEffect(() => {
-    console.log('Loading...')
-    handleClientLoad()
-  }, [])
+  // Load OAuth2.0 after rendering react component
+  useEffect(handleClientLoad, [])
 
   return (
     <div className="app">

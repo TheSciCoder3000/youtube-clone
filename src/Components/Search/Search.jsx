@@ -5,12 +5,17 @@ import { searchByKeyword } from '../../OAuth2.0'
 import ChannelItem from './ChannelItem'
 import VideoItem from './VideoItem'
 
+// Search View Component
 function Search({ IsSignedIn }) {
+    // Get the search keyword from the url
     const { searchData: searchKeyword } = useParams()
+
+    // Initialize SearchData State
     const [SearchData, setSearchData] = useState({})
 
+    // After component finishes rendering, contact the api for a list of search results based on the keyword
     useEffect(() => {
-        console.log('use effect - searching: ', IsSignedIn)
+        // Only Search if the user is signed in
         if (IsSignedIn) searchByKeyword(searchKeyword, setSearchData)
     },[IsSignedIn, searchKeyword])
 
